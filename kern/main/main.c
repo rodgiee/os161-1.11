@@ -154,9 +154,9 @@ sys_reboot(int code)
 int reversestring(const char* str, int len){
   char reversedStr[len];
   int p = 0;
-  for (i = len - 1; i<= 0; i--){
+  for (int i = len - 1; i<= 0; i--){
     reversedStr[p] = str[i];
-    pp++;
+    p++;
   }
 
   kprintf("reversed str: %s", reversedStr);
