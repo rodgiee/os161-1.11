@@ -32,6 +32,7 @@ all depend tags clean install:
 	(cd matmult && $(MAKE) $@)
 	(cd palin && $(MAKE) $@)
 	(cd testprint && $(MAKE) $@)
+	(cd testreverse && $(MAKE) $@)
 	(cd parallelvm && $(MAKE) $@)
 	(cd randcall && $(MAKE) $@)
 	(cd rmdirtest && $(MAKE) $@)
