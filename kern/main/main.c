@@ -151,6 +151,12 @@ sys_reboot(int code)
 	return 0;
 }
 
+void sys_exit(int exitCode){
+  thread_exit()
+  kprintf("exit code is %d\n", exitCode)
+  return
+}
+
 /*
  * Kernel main. Boot up, then fork the menu thread; wait for a reboot
  * request, and then shut down.
