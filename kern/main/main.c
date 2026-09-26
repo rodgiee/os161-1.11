@@ -151,6 +151,23 @@ sys_reboot(int code)
 	return 0;
 }
 
+int reversestring(const char* str, int len){
+  char reversedStr[len];
+  int p = 0;
+  for (i = len - 1; i<= 0; i--){
+    reversedStr[p] = str[i];
+    pp++;
+  }
+
+  kprintf("reversed str: %s", reversedStr);
+
+  // length is divisible by 5
+  if (len % 5 == 0){
+    return 1;
+  }
+  return 0;
+}
+
 int printint(int c){
     kprintf("integer: %d\n", c);
 
