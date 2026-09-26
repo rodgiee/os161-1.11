@@ -152,14 +152,14 @@ sys_reboot(int code)
 }
 
 int printint(int c){
-    kprintf("integer: %d\n", c)
+    kprintf("integer: %d\n", c);
 
     // divisible by 2
     if(c % 2 == 0){
-      return 0
+      return 0;
     }
 
-    return 1
+    return 1;
 }
 
 void _exit(int exitCode) {
