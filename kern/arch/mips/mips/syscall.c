@@ -78,7 +78,8 @@ mips_syscall(struct trapframe *tf)
 		break;
 
 	      case SYS_printint:
-		err = printint(tf->tf_a0);
+		retval = printint(tf->tf_a0);
+		err = 0;
 		break;
  
 	    default:
