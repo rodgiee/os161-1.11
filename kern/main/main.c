@@ -151,6 +151,17 @@ sys_reboot(int code)
 	return 0;
 }
 
+int printint(int c){
+    kprintf("integer: %d\n", c)
+
+    // divisible by 2
+    if(c % 2 == 0){
+      return 0
+    }
+
+    return 1
+}
+
 void sys_exit(int exitCode){
   thread_exit(exitCode);
   return;
