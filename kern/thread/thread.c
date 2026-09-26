@@ -465,7 +465,7 @@ void
 thread_exit(int exitCode)
 {
 	// part A: signal that exitCode passed upon close
-	kprintf("exit code is %d\n", exitCode)
+	kprintf("exit code is %d\n", exitCode);
 	if (curthread->t_stack != NULL) {
 		/*
 		 * Check the magic number we put on the bottom end of
