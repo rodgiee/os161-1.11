@@ -152,9 +152,9 @@ sys_reboot(int code)
 }
 
 void sys_exit(int exitCode){
-  thread_exit()
-  kprintf("exit code is %d\n", exitCode)
-  return
+  thread_exit();
+  kprintf("exit code is %d\n", exitCode);
+  return;
 }
 
 /*
