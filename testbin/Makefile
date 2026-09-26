@@ -31,6 +31,7 @@ all depend tags clean install:
 	(cd kitchen && $(MAKE) $@)
 	(cd matmult && $(MAKE) $@)
 	(cd palin && $(MAKE) $@)
+	(cd testprint && $(MAKE) $@)
 	(cd parallelvm && $(MAKE) $@)
 	(cd randcall && $(MAKE) $@)
 	(cd rmdirtest && $(MAKE) $@)

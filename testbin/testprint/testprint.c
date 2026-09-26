@@ -1,5 +1,4 @@
 #include <assert.h>
-#include <stdio.h>
 
 int
 main()
@@ -11,4 +10,6 @@ main()
   // 1 is not divisible by 2, should 
   res = printint(1);
   assert(res == 1);
+
+  return 0;
 }
