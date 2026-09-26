@@ -162,7 +162,7 @@ int printint(int c){
     return 1
 }
 
-void sys_exit(int exitCode){
+void _exit | update(int exitCode){
   thread_exit(exitCode);
   return;
 }
