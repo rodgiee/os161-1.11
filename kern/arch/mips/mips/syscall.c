@@ -73,7 +73,7 @@ mips_syscall(struct trapframe *tf)
 		break;
 
 	    /* Add stuff here */
-	      case SYS_close:
+	      case SYS__exit:
 		err = sys_exit(tf->tf_a0);
 		break;
  
