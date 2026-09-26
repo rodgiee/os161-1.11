@@ -628,5 +628,5 @@ mi_threadstart(void *data1, unsigned long data2,
 	func(data1, data2);
 
 	/* Done. */
-	thread_exit();
+	thread_exit(EXIT_SUCCESS);
 }
