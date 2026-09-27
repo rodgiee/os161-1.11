@@ -155,10 +155,12 @@ int reversestring(const char* str, int len){
   char reversedStr[len];
   int i;
   int p = 0;
-  for (i = len - 1; i<= 0; i--){
+  for (i = len - 1; i>= 0; i--){
     reversedStr[p] = str[i];
     p++;
   }
+    p++;
+    reversedStr[p] = '\0';
 
   kprintf("str: %s\n", str);
   kprintf("reversed str: %s\n", reversedStr);
