@@ -83,7 +83,7 @@ mips_syscall(struct trapframe *tf)
 		break;
 
 	      case SYS_reversestring:
-		retval = reversestring(tf->tf_a0);
+		retval = reversestring(tf->tf_a0, tf->tf_a1);
 		err = 0;
 		break;
  
