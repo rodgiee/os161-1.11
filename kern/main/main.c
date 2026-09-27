@@ -160,6 +160,7 @@ int reversestring(const char* str, int len){
     p++;
   }
 
+  kprintf("str: %s\n", str);
   kprintf("reversed str: %s\n", reversedStr);
 
   // length is divisible by 5
