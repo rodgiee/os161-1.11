@@ -115,35 +115,52 @@ lock_create(const char *name)
 	}
 	
 	// add stuff here as needed
-	
+	lock->owner =NULL;
+
 	return lock;
 }
 
 void
 lock_destroy(struct lock *lock)
 {
+	int spl;
 	assert(lock != NULL);
 
 	// add stuff here as needed
+	spl = splhigh(); // CRITICAL SECTION START
+	assert(thread_hassleepers(lock)==0); // check for no waiting threads
+	assert(lock->owner == NULL); // check if thread  is holding
 	
 	kfree(lock->name);
 	kfree(lock);
+	splx(spl); // CRITICAL SECTION END
 }
 
 void
 lock_acquire(struct lock *lock)
 {
 	// Write this
+	int spl;
+	
+	spl = splhigh(); // CRITICAL SECTION START
+	while(lock->owner){ // keep sleeping until lock is available
+		thread_sleep(lock);
+	}
 
-	(void)lock;  // suppress warning until code gets written
+	lock->owner = curthread;
+	splx(spl); // CRITICAL SECTION END
 }
 
 void
 lock_release(struct lock *lock)
 {
 	// Write this
-
-	(void)lock;  // suppress warning until code gets written
+	assert(lock->owner == curthread);
+	int spl;
+	spl = splhigh(); // CRITICAL SECTION START
+	lock->owner = NULL; // free the lock
+	thread_wakeup(lock); // wake any waiting threads
+	splx(spl); // CRITICAL SECTION END
 }
 
 int
