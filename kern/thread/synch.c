@@ -217,7 +217,7 @@ cv_destroy(struct cv *cv)
 void
 cv_wait(struct cv *cv, struct lock *lock)
 {
-	int spl
+	int spl;
 	// Write this
 	// release lock
 	lock_release(lock);
