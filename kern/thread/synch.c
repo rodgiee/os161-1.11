@@ -202,34 +202,48 @@ cv_create(const char *name)
 void
 cv_destroy(struct cv *cv)
 {
+	int spl;
+	spl = splhigh();
 	assert(cv != NULL);
+
 
 	// add stuff here as needed
 	
 	kfree(cv->name);
 	kfree(cv);
+	splx(spl);
 }
 
 void
 cv_wait(struct cv *cv, struct lock *lock)
 {
+	int spl
 	// Write this
-	(void)cv;    // suppress warning until code gets written
-	(void)lock;  // suppress warning until code gets written
+	// release lock
+	lock_release(lock);
+	// put sleep at cv
+	while (lock->owner != curthread){
+		thread_sleep(cv);
+		// attemp to re-acquire lock after waking
+		spl = splhigh(); // CRITICAL SECTION START
+		if (lock->owner == NULL){
+			lock_acquire(lock);
+		}
+		splx(spl); // CRITICAL SECTION END
+	}
 }
 
 void
 cv_signal(struct cv *cv, struct lock *lock)
 {
 	// Write this
-	(void)cv;    // suppress warning until code gets written
-	(void)lock;  // suppress warning until code gets written
+	// wake waiting threads on cv
+	thread_wakeup_one(cv);
 }
 
 void
 cv_broadcast(struct cv *cv, struct lock *lock)
 {
 	// Write this
-	(void)cv;    // suppress warning until code gets written
-	(void)lock;  // suppress warning until code gets written
+	thread_wakeup(cv);
 }
