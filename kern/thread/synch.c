@@ -166,11 +166,13 @@ lock_release(struct lock *lock)
 int
 lock_do_i_hold(struct lock *lock)
 {
-	// Write this
+	int spl;
+	spl = splhigh();
+	if (lock->owner != NULL){
+	  return 1;
+	}
+	return 0;
 
-	(void)lock;  // suppress warning until code gets written
-
-	return 1;    // dummy until code gets written
 }
 
 ////////////////////////////////////////////////////////////
@@ -218,19 +220,16 @@ void
 cv_wait(struct cv *cv, struct lock *lock)
 {
 	int spl;
+	assert(lock->owner == curthread);
 	// Write this
 	// release lock
+	spl = splhigh(); // CRITICAL SECTION START
 	lock_release(lock);
 	// put sleep at cv
-	while (lock->owner != curthread){
-		thread_sleep(cv);
-		// attemp to re-acquire lock after waking
-		spl = splhigh(); // CRITICAL SECTION START
-		if (lock->owner == NULL){
-			lock_acquire(lock);
-		}
-		splx(spl); // CRITICAL SECTION END
-	}
+	thread_sleep(cv);
+	// attemp to re-acquire lock after waking
+	lock_acquire(lock);
+	splx(spl); // CRITICAL SECTION END
 }
 
 void
@@ -238,6 +237,7 @@ cv_signal(struct cv *cv, struct lock *lock)
 {
 	// Write this
 	// wake waiting threads on cv
+	assert(lock->owner == curthread);
 	thread_wakeup_one(cv);
 }
 
@@ -245,5 +245,6 @@ void
 cv_broadcast(struct cv *cv, struct lock *lock)
 {
 	// Write this
+	assert(lock->owner == curthread);
 	thread_wakeup(cv);
 }
