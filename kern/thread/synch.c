@@ -166,8 +166,6 @@ lock_release(struct lock *lock)
 int
 lock_do_i_hold(struct lock *lock)
 {
-	int spl;
-	spl = splhigh();
 	if (lock->owner == curthread){
 	  return 1;
 	}
