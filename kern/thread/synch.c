@@ -235,14 +235,20 @@ cv_signal(struct cv *cv, struct lock *lock)
 {
 	// Write this
 	// wake waiting threads on cv
+	int spl;
+	spl = splhigh();
 	assert(lock->owner == curthread);
 	thread_wakeup_one(cv);
+	splx(spl);
 }
 
 void
 cv_broadcast(struct cv *cv, struct lock *lock)
 {
 	// Write this
+	int spl;
+	spl = splhigh();
 	assert(lock->owner == curthread);
 	thread_wakeup(cv);
+	splx(spl);
 }
