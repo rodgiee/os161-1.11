@@ -168,7 +168,7 @@ lock_do_i_hold(struct lock *lock)
 {
 	int spl;
 	spl = splhigh();
-	if (lock->owner != NULL){
+	if (lock->owner == curthread){
 	  return 1;
 	}
 	return 0;
